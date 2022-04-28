@@ -113,4 +113,4 @@ on vehicles.veh_reg_no = rental_records.veh_reg_no
 where vehicles.veh_reg_no not in  (
 select veh_reg_no 
 from rental_records 
-where rental_records.start_date and rental_records.end_date > curdate());
+where rental_records.start_date between curdate() and date_add(curdate(), interval 10 day))
