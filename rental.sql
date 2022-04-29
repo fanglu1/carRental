@@ -1,24 +1,12 @@
 -- 1)Customer 'Angel' has rented 'SBA1111A' from today for 10 days.
 insert into rental_records (veh_reg_no, customer_id, start_date, end_date, lastUpdated)
 values
-   (
-    'SBA1111A', 
-    (select customer_id from customers where name='Angel'),
-    curdate(),
-    date_add(curdate(), interval 10 day),
-    null
-    );
+   ('SBA1111A', (select customer_id from customers where name='Angel'), curdate(), date_add(curdate(), interval 10 day), null);
 
 -- 2) Customer 'Kumar' has rented 'GA5555E' from tomorrow for 3 months.
 insert into rental_records (veh_reg_no, customer_id, start_date, end_date, lastUpdated)
 values
-   (
-    'GA5555E', 
-    (select customer_id from customers where name='Kumar'),
-    curdate(),
-    date_add(curdate(), interval 3 month),
-    null
-    );
+   ('GA5555E', (select customer_id from customers where name='Kumar'), curdate(), date_add(curdate(), interval 3 month), null );
 
 -- 3) List all rental records (start date, end date) with vehicle's registration number, brand, and customer name, sorted by vehicle's categories followed by start date.
 select 
@@ -33,7 +21,7 @@ inner join customers on rental_records.customer_id = customers.customer_id
 order by vehicles.category, start_date;
 
 -- 4) List all the expired rental records (end_date before CURDATE()).
-select end_date
+select *
 from rental_records
 where end_date < curdate();
 
